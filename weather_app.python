@@ -1,0 +1,21 @@
+import urllib.request
+import json
+
+API_KEY = "920fbf03f074829d54221f4eaa42daea"
+
+def get_weather(city):
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
+
+    try:
+        response = urllib.request.urlopen(url)
+        data = json.loads(response.read())
+
+        print("\nWeather in", city)
+        print("Temperature:", data['main']['temp'], "°C")
+        print("Condition:", data['weather'][0]['description'])
+
+    except Exception as e:
+        print("Error:", e)
+
+city = input("Enter city name: ")
+get_weather(city)
